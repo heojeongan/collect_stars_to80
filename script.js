@@ -50,12 +50,17 @@ function setupRealtimeSync() {
 }
 
 async function save() {
-  if (!db) return;
+  if (!db) {
+    console.log("❌ 데이터베이스(db) 객체가 연결되지 않았습니다!");
+    return;
+  }
   try {
+    console.log("🔄 파이어베이스에 저장 시도 중...");
     const docRef = doc(db, "stars", "progressData");
     await setDoc(docRef, { completed: [...completed] });
+    console.log("✅ 파이어베이스에 성공적으로 저장됨!");
   } catch (e) {
-    console.error("저장 실패:", e);
+    console.error("❌ 저장 중 에러 발생:", e);
   }
 }
 
