@@ -1,0 +1,159 @@
+
+* {
+    box-sizing: border-box;
+  }
+  
+  body {
+    margin: 0;
+    min-height: 100vh;
+    color: white;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background:
+      radial-gradient(ellipse at 50% 75%, #55418b 0%, transparent 45%),
+      linear-gradient(180deg, #080d29, #19244e 60%, #392d66);
+    overflow-x: hidden;
+  }
+  
+  header {
+    padding: 35px 15px 15px;
+  }
+  
+  h1 {
+    font-size: clamp(25px, 5vw, 42px);
+    margin-bottom: 8px;
+  }
+  
+  .subtitle {
+    color: #d8d4f5;
+  }
+  
+  .castle {
+    font-size: clamp(65px, 13vw, 115px);
+    margin: 15px 0 5px;
+    filter: drop-shadow(0 0 20px #ffe9a1);
+    animation: float 3s ease-in-out infinite;
+  }
+  
+  @keyframes float {
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+  
+  .progress-area {
+    width: min(88%, 550px);
+    margin: 20px auto;
+  }
+  
+  .progress-text {
+    font-size: 23px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .bar {
+    height: 15px;
+    background: #ffffff30;
+    border-radius: 20px;
+    overflow: hidden;
+  }
+  
+  .fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #ffe58a, #fff5c5);
+    border-radius: 20px;
+    transition: width .4s;
+    box-shadow: 0 0 12px #ffe58a;
+  }
+  
+  .grid {
+    width: min(92%, 650px);
+    margin: 25px auto;
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    gap: clamp(5px, 1.5vw, 12px);
+  }
+  
+  .star {
+    aspect-ratio: 1;
+    border: 1px solid #ffffff35;
+    border-radius: 50%;
+    background: #ffffff12;
+    color: #b8b8d5;
+    font-size: clamp(15px, 3.5vw, 25px);
+    cursor: pointer;
+    transition: .25s;
+  }
+  
+  .star.done {
+    color: #fff2a6;
+    background: #ffe58a30;
+    border-color: #ffe58a;
+    text-shadow: 0 0 12px #ffe58a;
+    box-shadow: 0 0 13px #ffe58a70;
+    transform: scale(1.04);
+  }
+  
+  .star:hover {
+    transform: scale(1.15);
+  }
+  
+  .buttons {
+    margin: 20px auto 35px;
+  }
+  
+  button.action {
+    border: 1px solid #ffffff55;
+    color: white;
+    background: #ffffff18;
+    border-radius: 25px;
+    padding: 11px 18px;
+    margin: 5px;
+    cursor: pointer;
+  }
+  
+  button.action:hover {
+    background: #ffffff35;
+  }
+  
+  .note {
+    color: #c9c5e8;
+    font-size: 13px;
+    padding: 0 15px 30px;
+  }
+  
+  #celebration {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 5;
+    background: #090d29ef;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 20px;
+  }
+  
+  #celebration h2 {
+    font-size: clamp(28px, 6vw, 48px);
+    color: #ffe9a1;
+  }
+  
+  #celebration p {
+    font-size: 18px;
+    line-height: 1.8;
+  }
+  
+  .celebration-castle {
+    font-size: 75px;
+  }
+  
+  #fireworks {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 6;
+  }
+  

@@ -1,0 +1,79 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>100% 달성 목표</title>
+  <link rel="stylesheet" href="style.css">
+  <script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/13.2.0/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/13.2.0/firebase-analytics.js";
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+  
+    // Your web app's Firebase configuration
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    const firebaseConfig = {
+      apiKey: "AIzaSyCGp9lweDMFJfzK9fk2atWyyYrR_YloeEM",
+      authDomain: "collect-stars-d06bc.firebaseapp.com",
+      projectId: "collect-stars-d06bc",
+      storageBucket: "collect-stars-d06bc.firebasestorage.app",
+      messagingSenderId: "584449062456",
+      appId: "1:584449062456:web:391778c5a62537bd9bd8cd",
+      measurementId: "G-L8C53QKJ6Z"
+    };
+  
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+  </script>
+  <script src="script.js" defer></script>
+</head>
+<body>
+
+  <header>
+    <h1>아버지의 꿈, 어머니의 소원</h1>
+    <h2>IUBA 전남대 센터가 이루자!</h2>
+    <div class="subtitle">하나씩 모아 완성하는 우리의 여정</div>
+    <div class="castle">🏰</div>
+  </header>
+
+  <section class="progress-area">
+    <div class="progress-text">
+      <span id="count">0</span> / 80개의 별
+    </div>
+    <div class="bar">
+      <div class="fill" id="fill"></div>
+    </div>
+  </section>
+
+  <div class="grid" id="grid"></div>
+
+  <div class="buttons">
+    <button class="action" id="backupBtn">진행 상황 백업</button>
+    <button class="action" id="restoreBtn">백업 불러오기</button>
+    <button class="action" id="resetBtn">처음부터 시작</button>
+    <input id="restoreFile" type="file" accept=".json,application/json" hidden>
+  </div>
+
+  <div class="note">
+    별 하나를 누르면 완료 표시가 됩니다.
+    진행 상황은 이 브라우저에 자동 저장됩니다.
+  </div>
+
+  <div id="celebration">
+    <h2>80개의 별이 모두 빛납니다!</h2>
+    <div class="celebration-castle">🏰✨</div>
+    <p>
+      우리의 수고가 모여 하나의 아름다운 그림을 완성했습니다.<br>
+      함께한 모든 노력과 사랑이 천국에서 빛나는 상급으로 이어지기를 바랍니다.
+    </p>
+    <button class="action" id="closeCelebration">계속 보기</button>
+  </div>
+
+  <canvas id="fireworks"></canvas>
+
+</body>
+</html>
