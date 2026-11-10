@@ -1,5 +1,3 @@
-// 파이어베이스 공식 CDN 모듈 직접 임포트
-// Import the functions you need from the SDKs you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/13.2.0/firebase-app.js";
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/13.2.0/firebase-analytics.js";
 // TODO: Add SDKs for Firebase products that you want to use
@@ -122,3 +120,99 @@ document.getElementById("restoreFile").addEventListener("change", async e => {
     alert("올바른 백업 JSON 파일이 아닙니다.");
   }
   e.target.value = "";
+});
+
+async function resetProgress() {
+  if (!confirm("모든 진행 상황을 초기화할까요?")) return;
+  completed.clear();
+  await save();
+  update();
+}
+
+function celebrate() {
+  document.getElementById("celebration").style.display = "flex";
+  startFireworks();
+}
+
+function closeCelebration() {
+  document.getElementById("celebration").style.display = "none";
+  stopFireworks();
+}
+
+document.getElementById("backupBtn").addEventListener("click", backup);
+document.getElementById("restoreBtn").addEventListener("click", () => document.getElementById("restoreFile").click());
+document.getElementById("resetBtn").addEventListener("click", resetProgress);
+document.getElementById("closeCelebration").addEventListener("click", closeCelebration);
+
+// 불꽃놀이 효과 코드
+const canvas = document.getElementById("fireworks");
+const ctx = canvas.getContext("2d");
+let particles = [];
+let animationId;
+let lastBurst = 0;
+
+function resizeCanvas() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+window.addEventListener("resize", resizeCanvas);
+resizeCanvas();
+
+function burst() {
+  const x = Math.random() * canvas.width;
+  const y = Math.random() * canvas.height * 0.65;
+  const colors = ["#ffe58a", "#ff9ed2", "#9eeaff", "#ffffff"];
+
+  for (let i = 0; i < 65; i++) {
+    const angle = Math.PI * 2 * i / 65;
+    const speed = Math.random() * 4 + 1;
+    particles.push({
+      x, y,
+      vx: Math.cos(angle) * speed,
+      vy: Math.sin(angle) * speed,
+      life: 90,
+      color: colors[Math.floor(Math.random() * colors.length)]
+    });
+  }
+}
+
+function animate(time) {
+  animationId = requestAnimationFrame(animate);
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  if (time - lastBurst > 650) {
+    burst();
+    lastBurst = time;
+  }
+
+  particles = particles.filter(p => p.life > 0);
+  particles.forEach(p => {
+    p.x += p.vx;
+    p.y += p.vy;
+    p.vy += 0.025;
+    p.life--;
+
+    ctx.globalAlpha = p.life / 90;
+    ctx.fillStyle = p.color;
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, 2.5, 0, Math.PI * 2);
+    ctx.fill();
+  });
+  ctx.globalAlpha = 1;
+}
+
+function startFireworks() {
+  stopFireworks();
+  particles = [];
+  lastBurst = 0;
+  animationId = requestAnimationFrame(animate);
+}
+
+function stopFireworks() {
+  if (animationId) cancelAnimationFrame(animationId);
+  animationId = null;
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+}
+
+// 앱 시작 시 실시간 동기화 실행
+setupRealtimeSync();
