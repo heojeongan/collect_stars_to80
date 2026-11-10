@@ -17,7 +17,7 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const db = getAnalytics(app);
+const db = getFirestore(app);
 
 const TOTAL = 80;
 let completed = new Set();
